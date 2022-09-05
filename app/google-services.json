@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "736220806662",
+    "firebase_url": "https://mestikavisiondg.firebaseio.com",
+    "project_id": "mestikavisiondg",
+    "storage_bucket": "mestikavisiondg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736220806662:android:cdc85d66b095f7bc5b0d87",
+        "android_client_info": {
+          "package_name": "com.multipolar.visiondg.mestika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736220806662-cru37fscf8fv8q3op24nfvj13aeb10q2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWDQLKKtwJKOhHSVZnW_qOb-HfF4YEa_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736220806662-cru37fscf8fv8q3op24nfvj13aeb10q2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

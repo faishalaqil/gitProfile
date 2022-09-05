@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="names">
+        <item>Tabungan A</item>
+        <item>Tabungan B</item>
+        <item>Tabungan C</item>
+    </string-array>
+
+    <string-array name="saving_descriptions">
+        <item>Memberikan suku bunga kompetitif</item>
+        <item>Memiliki buku tabungan</item>
+        <item>Dapat mengikuti program Undian Gempita Bank Mestika yang diadakan setiap 6 (enam) bulan</item>
+        <item>Setiap saldo rata-rata per bulan rekening Tames Rp 1.000.000,- akan mendapatkan 1 (satu) nomor undian</item>
+    </string-array>
+
+</resources>

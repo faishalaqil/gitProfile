@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GitProfile</string>
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+    <string name="common_cannot_connect_to_server">Cant connect to server</string>
+    <string name="common_timeout_connect_to_server">Timeout connecting to server</string>
+    <string name="common_no_internet_connection">No internet connection</string>
+    <string name="common_error_system">System error</string>
+
+    <!--    welcome-->
+    <string name="welcome_title">Welcome to finnews</string>
+    <string name="welcome_tending_title">Trending this week</string>
+    <string name="welcome_genre_title">Find movie by genre</string>
+
+</resources>

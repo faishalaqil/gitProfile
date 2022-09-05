@@ -1,0 +1,32 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_title_margin">24dp</dimen>
+    <dimen name="card_margin">10dp</dimen>
+    <dimen name="padding_ver_high">14dp</dimen>
+    <dimen name="margin_common">8dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_very_small">3dp</dimen>
+    <dimen name="margin_big">30dp</dimen>
+    <dimen name="margin_card_big">50dp</dimen>
+    <dimen name="margin_layout">16dp</dimen>
+    <dimen name="margin_layout_botnav">90dp</dimen>
+
+    <dimen name="font_title1">20sp</dimen>
+    <dimen name="font_title2">18sp</dimen>
+    <dimen name="font_title3">16sp</dimen>
+    <dimen name="font_title4">24sp</dimen>
+    <dimen name="font_title5">20sp</dimen>
+    <dimen name="font_title6">30sp</dimen>
+    <dimen name="font_desc">16sp</dimen>
+    <dimen name="font_desc_medium">14sp</dimen>
+    <dimen name="font_sub_medium">13sp</dimen>
+    <dimen name="font_desc_small">12sp</dimen>
+    <dimen name="font_sub_small">11sp</dimen>
+    <dimen name="font_very_small">10sp</dimen>
+
+    <dimen name="card_small">60dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

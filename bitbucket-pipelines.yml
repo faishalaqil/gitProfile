@@ -1,0 +1,53 @@
+
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: openjdk:8
+
+pipelines:
+  custom: # Pipelines that are triggered manually
+    build_feature_dashboard: # The name that is displayed in the list in the Bitbucket Cloud GUI
+      - step:
+          caches:
+            - android-sdk
+            - gradlewrapper
+          name: Build apk debug
+          #size: 1x
+          script:
+            - JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+            # Download and unzip android sdk
+            - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+            - unzip -o -qq android-sdk.zip -d android-sdk
+            - echo 'development branch building. tests should run now.'
+
+            # Define Android Home and add PATHs
+            - export ANDROID_HOME="/opt/atlassian/pipelines/agent/build/android-sdk"
+            - export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+            #           - ./gradlew test
+            #            - chmod +x ./gradlew
+
+            # Download packages.
+            - yes | sdkmanager "platform-tools"
+            - yes | sdkmanager "platforms;android-29"
+            - yes | sdkmanager "build-tools;29.0.3"
+            - yes | sdkmanager "extras;android;m2repository"
+            - yes | sdkmanager "extras;google;m2repository"
+            - yes | sdkmanager "extras;google;instantapps"
+            - yes | sdkmanager --licenses
+
+            - export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+            - ./gradlew assembleDebug --stacktrace
+            #./gradlew assembleRelease
+            - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"app/build/outputs/apk/debug/app-debug.apk"
+        #            - curl -F file=@"./app/build/outputs/apk/release/app-release.apk"
+          artifacts:
+            - app/release/app-debug_ft_dashboard.apk
+
+definitions:
+  caches:
+    android-sdk: android-sdk
+    gradlewrapper: ~/.gradle/wrapper
+  services:
+    docker:
+      memory: 1024

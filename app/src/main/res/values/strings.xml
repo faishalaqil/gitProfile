@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">GitProfile</string>
+    <string name="common_yes">Iya</string>
+    <string name="common_no">Tidak</string>
+    <string name="common_cannot_connect_to_server">Cant connect to server</string>
+    <string name="common_timeout_connect_to_server">Timeout connecting to server</string>
+    <string name="common_no_internet_connection">No internet connection</string>
+    <string name="common_error_system">System error</string>
+
+    <!--    welcome-->
+    <string name="welcome_title">Selamat datang di gitProfile</string>
+    <string name="welcome_tending_title">Trending minggu ini</string>
+    <string name="welcome_genre_title">Cari film berdasarkan genre</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
