@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.astro.test.aqil">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.astro">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:name="com.astro.test.aqil.App"
+        android:allowBackup="false"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GitProfile">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        tools:targetApi="q">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name="com.astro.test.aqil.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.astro.test.aqil.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

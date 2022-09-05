@@ -1,43 +1,197 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdk 32
+    compileSdkVersion 31
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.astro.test.aqil"
-        minSdk 21
-        targetSdk 32
+        minSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
-
+        versionName "4.4.23"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+/*
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'
+        }
+*/
     }
 
     buildTypes {
+        debug {
+//            debuggable true
+//            minifyEnabled true
+//            shrinkResources true
+//            multiDexEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        //More than one file was found with OS independent path
+        // exclude 'okhttp3/internal/publicsuffix/publicsuffixes.gz'
+        exclude 'META-INF/io.netty.versions.properties'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/metadata.kotlin_module'
+        exclude 'META-INF/kotlinx-metadata-jvm.kotlin_module'
+        exclude 'META-INF/kotlinx-metadata.kotlin_module'
+        exclude 'META-INF/core.kotlin_module'
+        exclude 'META-INF/specs.kotlin_module'
+        exclude 'META-INF/metadata.jvm.kotlin_module'
+        exclude 'META-INF/elements.kotlin_module'
+    }
+
+    configurations {
+        compile.exclude module: 'dashboard'
+    }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+/*
+    externalNativeBuild {
+        cmake {
+            path "src/main/c/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+*/
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.datastore:datastore-core:1.0.0-rc01'
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "org.koin:koin-test:2.1.6"
+
+    // Kotlin
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.10"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Android
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Architecture Component
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation "androidx.preference:preference-ktx:1.1.1"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation 'com.squareup.moshi:moshi-kotlin-codegen:1.12.0'
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation "com.squareup.retrofit2:converter-scalars:2.6.1"
+
+    // GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation ('com.github.bumptech.glide:okhttp3-integration:4.11.0'){
+        exclude group: 'glide-parent'
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // alphamu
+    implementation('com.alimuzaffar.lib:pinentryedittext:2.0.6') {
+        // Exclude is only needed if you already have
+        // androidx.appcompat as a dependency in your app.
+        exclude group: 'androidx.appcompat', module: 'appcompat'
+    }
+
+    // Android Material
+    implementation 'com.google.android.material:material:1.2.1'
+
+    // android room
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt 'androidx.room:room-compiler:2.2.5'
+    implementation "androidx.room:room-ktx:2.2.5"
+
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite:2.1.0"
+
+    def koin_version = '2.1.6'
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:$koin_version"
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope features
+    implementation "org.koin:koin-android-scope:$koin_version"
+    // Koin Android ViewModel features
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+    implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+
+    //Shimer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Recyclerview indicator
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.1"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    //RX
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+
+    //Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
+
+    implementation 'com.github.RohitSurwase.UCE-Handler:uce_handler:1.4'
+
+    //youtube
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+
+    //endless sv
+    implementation ('io.github.andviane:uncover:2.0.1@aar')
 }
